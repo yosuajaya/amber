@@ -1,3 +1,10 @@
+ENV["AMBER_ENV"] ||= "test"
+
+# Prevents running tests in production
+if Amber.env.production?
+  raise "The Amber environment is running in production mode!"
+end
+
 require "spec"
 require "garnet_spec"
 require "../config/*"
@@ -6,9 +13,6 @@ module Spec
   DRIVER = :chrome
   PATH   = "/usr/local/bin/chromedriver"
 
-  # Not all server implementations will support every WebDriver feature.
-  # Therefore, the client and server should use JSON objects with the properties
-  # listed below when describing which features a session supports.
   capabilities = {
     browserName:              "chrome",
     version:                  "",
