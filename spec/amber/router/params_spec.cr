@@ -103,6 +103,7 @@ module Amber::Router
 
       it "returns a hash with all params" do
         params.to_h.keys.should eq %w(test _method status _csrf title content)
+        params.to_h["test"].should eq "test"
       end
     end
   end
